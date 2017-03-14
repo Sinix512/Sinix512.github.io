@@ -1,0 +1,23 @@
+img
+{
+	height : 120px;
+	width : 120px;
+}
+
+td
+{
+	max-height : 120px;
+	text-align : center;
+	font-family : Î¢ÈíÑÅºÚ, ºÚÌå;
+	color : white;
+}
+
+tr
+{
+	background-color : black;
+}
+
+strong
+{
+	font-style : italic;
+}
