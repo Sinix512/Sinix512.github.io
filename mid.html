@@ -19,6 +19,7 @@ body{height:100%;margin:0px;padding:0px}
 <div id="container"></div> 
 <script type="text/javascript"> 
 var map = new BMap.Map("container");
+map.enableScrollWheelZoom(true);
 var points = new Array;
 var search = new BMap.LocalSearch(map,{onSearchComplete: function(result) {
 	var poi = result.getPoi(0);
@@ -29,12 +30,14 @@ var search = new BMap.LocalSearch(map,{onSearchComplete: function(result) {
 		for(var i = 0; i < points.length; i++) {
 			midx += points[i].lng;
 			midy += points[i].lat;
+			var marker = new BMap.Marker(points[i]);
+			map.addOverlay(marker);
 		}
 		midx /= 4;
 		midy /= 4;
 		var midPoint = new BMap.Point(midx, midy);
 		var marker = new BMap.Marker(midPoint);
-		map.centerAndZoom(midPoint, 15); 
+		map.centerAndZoom(midPoint, 13); 
 		map.addOverlay(marker);
 	}
 }});
