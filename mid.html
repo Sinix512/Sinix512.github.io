@@ -1,0 +1,47 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title>找个中点贼麻烦</title>  
+<style type="text/css">  
+html{height:100%}  
+body{height:100%;margin:0px;padding:0px}  
+#container{height:100%}  
+</style>  
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=7c7d6b5c8b81fc145d4c93eef39574ac">
+//v2.0版本的引用方式：src="http://api.map.baidu.com/api?v=2.0&ak=7c7d6b5c8b81fc145d4c93eef39574ac"
+//v1.4版本及以前版本的引用方式：src="http://api.map.baidu.com/api?v=1.4&key=7c7d6b5c8b81fc145d4c93eef39574ac&callback=initialize"
+</script>
+</head>  
+ 
+<body>  
+<div id="container"></div> 
+<script type="text/javascript"> 
+var map = new BMap.Map("container");
+var points = new Array;
+var search = new BMap.LocalSearch(map,{onSearchComplete: function(result) {
+	var poi = result.getPoi(0);
+	points.push(poi.point);
+	if(points.length == 4) {
+		var midx = 0.0;
+		var midy = 0.0;
+		for(var i = 0; i < points.length; i++) {
+			midx += points[i].lng;
+			midy += points[i].lat;
+		}
+		midx /= 4;
+		midy /= 4;
+		var midPoint = new BMap.Point(midx, midy);
+		var marker = new BMap.Marker(midPoint);
+		map.centerAndZoom(midPoint, 15); 
+		map.addOverlay(marker);
+	}
+}});
+search.search("永丰产业基地");
+search.search("北京师范大学");
+search.search("北京创业大厦");
+search.search("外交部");
+</script>  
+</body>  
+</html>
